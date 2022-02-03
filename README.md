@@ -10,7 +10,7 @@ by adding `existence` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:existence, "~> 0.1.0"}
+    {:existence, github: "recruitee/existence", branch: "master"}
   ]
 end
 ```
