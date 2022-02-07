@@ -1,9 +1,9 @@
 defmodule Existence do
-  alias Existence.GenCheck
-
   @moduledoc """
   Existence - versatile async dependency health checks library.
   """
+
+  alias Existence.GenCheck
 
   defdelegate get_state(), to: GenCheck
   defdelegate get_check_state(check_id), to: GenCheck
