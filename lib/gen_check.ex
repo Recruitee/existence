@@ -48,6 +48,7 @@ defmodule Existence.GenCheck do
       |> Enum.map(fn {check_id, params} -> {check_id, struct!(__MODULE__, params)} end)
 
     Enum.each(data, fn {check_id, params} ->
+      set_check_state(check_id, Map.fetch!(params, :state))
       Process.send_after(self(), {:spawn_check, check_id}, Map.fetch!(params, :initial_delay))
     end)
 
