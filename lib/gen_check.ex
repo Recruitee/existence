@@ -14,10 +14,16 @@ defmodule Existence.GenCheck do
 
   @ets_table_name Module.concat(__MODULE__, Table)
 
+  # TODO decide if ets_exists?/1 should be executed on each get_* call
+  # def ets_exists?(table \\ @ets_table_name), do: :ets.whereis(table) != :undefined
+
   def get_state() do
     [{:state, state}] = :ets.lookup(@ets_table_name, :state)
     state
   end
+
+  def get_checks(),
+    do: @ets_table_name |> :ets.match({{:check_state, :"$1"}, :_}) |> List.flatten()
 
   def get_check_state(check_id) do
     [{{:check_state, ^check_id}, state}] = :ets.lookup(@ets_table_name, {:check_state, check_id})
