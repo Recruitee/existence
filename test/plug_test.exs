@@ -37,6 +37,7 @@ defmodule Existence.PlugTest do
 
   describe "initial FSM state: :error" do
     setup do
+      Application.put_env(:existence, Existence, [])
       start_supervised!(Existence)
       :ok
     end
@@ -72,6 +73,7 @@ defmodule Existence.PlugTest do
 
   describe "initial FSM state: :ok" do
     setup do
+      Application.put_env(:existence, Existence, [])
       start_supervised!({Existence, state: :ok})
       :ok
     end
