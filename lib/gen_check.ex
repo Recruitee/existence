@@ -79,8 +79,18 @@ defmodule Existence.GenCheck do
       else: {:keep_state, data}
   end
 
-  def unhealthy(:info, {:DOWN, ref, :process, pid, _status}, data) do
-    maybe_respawn_check(ref, pid, data)
+  def unhealthy(:info, {:DOWN, ref, :process, pid, :normal}, data) do
+    find_check(pid, ref, data)
+    |> maybe_respawn_check()
+
+    :keep_state_and_data
+  end
+
+  def unhealthy(:info, {:DOWN, ref, :process, pid, error}, data) do
+    {check_id, _check_params} = check = find_check(pid, ref, data)
+    maybe_respawn_check(check)
+    set_check_state(check_id, error)
+
     :keep_state_and_data
   end
 
@@ -103,12 +113,17 @@ defmodule Existence.GenCheck do
   end
 
   def healthy(:info, {:DOWN, ref, :process, pid, :normal}, data) do
-    maybe_respawn_check(ref, pid, data)
+    find_check(pid, ref, data)
+    |> maybe_respawn_check()
+
     :keep_state_and_data
   end
 
-  def healthy(:info, {:DOWN, ref, :process, pid, _error}, data) do
-    maybe_respawn_check(ref, pid, data)
+  def healthy(:info, {:DOWN, ref, :process, pid, error}, data) do
+    {check_id, _check_params} = check = find_check(pid, ref, data)
+    maybe_respawn_check(check)
+    set_check_state(check_id, error)
+
     {:next_state, :unhealthy, data}
   end
 
@@ -116,14 +131,13 @@ defmodule Existence.GenCheck do
     do: {:keep_state, spawn_check(check_id, data)}
 
   # ________helpers
-  defp maybe_respawn_check(ref, pid, data) do
-    check = Enum.find(data, nil, fn {_check_id, params} -> {pid, ref} == params.spawn_proc end)
+  defp find_check(pid, ref, data),
+    do: Enum.find(data, nil, fn {_check_id, params} -> {pid, ref} == params.spawn_proc end)
 
-    case check do
-      {check_id, params} -> Process.send_after(self(), {:spawn_check, check_id}, params.interval)
-      _ -> :ok
-    end
-  end
+  defp maybe_respawn_check({check_id, check_params}),
+    do: Process.send_after(self(), {:spawn_check, check_id}, check_params.interval)
+
+  defp maybe_respawn_check(_invalid_check), do: :ok
 
   defp spawn_check(check_id, data) do
     %{mfa: {m, f, a}, timeout: timeout} = params = Keyword.fetch!(data, check_id)
@@ -150,7 +164,7 @@ defmodule Existence.GenCheck do
   defp set_check_state(check_id, result),
     do: :ets.insert(@ets_table_name, {{:check_state, check_id}, result})
 
-  def is_ets_healthy?() do
+  defp is_ets_healthy?() do
     case :ets.select(@ets_table_name, [
            {{{:check_state, :"$1"}, :"$2"}, [{:"/=", :"$2", :ok}], [:"$2"]}
          ]) do

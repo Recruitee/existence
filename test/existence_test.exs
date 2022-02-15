@@ -226,9 +226,8 @@ defmodule ExistenceTest do
       assert :error == Existence.get_state()
     end
 
-    # FIXME
     test "get_checks/0" do
-      assert [check: :error] == Existence.get_checks()
+      assert [check: :killed] == Existence.get_checks()
     end
   end
 
@@ -249,9 +248,8 @@ defmodule ExistenceTest do
       assert :error == Existence.get_state()
     end
 
-    # FIXME
     test "get_checks/0" do
-      assert [check: :error] == Existence.get_checks()
+      assert [check: :killed] == Existence.get_checks()
     end
   end
 
@@ -272,9 +270,8 @@ defmodule ExistenceTest do
       assert :error == Existence.get_state()
     end
 
-    # FIXME
     test "get_checks/0" do
-      assert [check: :ok] == Existence.get_checks()
+      assert [check: :killed] == Existence.get_checks()
     end
   end
 
@@ -295,9 +292,8 @@ defmodule ExistenceTest do
       assert :error == Existence.get_state()
     end
 
-    # FIXME
     test "get_checks/0" do
-      assert [check: :ok] == Existence.get_checks()
+      assert [check: :killed] == Existence.get_checks()
     end
   end
 
@@ -318,7 +314,8 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [check: :error] == Existence.get_checks()
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks()
     end
   end
 
@@ -338,7 +335,8 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [check: :error] == Existence.get_checks()
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks()
     end
   end
 
@@ -359,7 +357,8 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [check: :ok] == Existence.get_checks()
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks()
     end
   end
 
@@ -380,7 +379,8 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [check: :ok] == Existence.get_checks()
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks()
     end
   end
 
@@ -401,7 +401,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [check: :error] == Existence.get_checks()
+      assert [check: {{:nocatch, :check_raise}, _stacktrace}] = Existence.get_checks()
     end
   end
 
@@ -421,7 +421,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [check: :error] == Existence.get_checks()
+      assert [check: {{:nocatch, :check_raise}, _stacktrace}] = Existence.get_checks()
     end
   end
 
@@ -442,7 +442,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [check: :ok] == Existence.get_checks()
+      assert [check: {{:nocatch, :check_raise}, _stacktrace}] = Existence.get_checks()
     end
   end
 
@@ -463,7 +463,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [check: :ok] == Existence.get_checks()
+      assert [check: {{:nocatch, :check_raise}, _stacktrace}] = Existence.get_checks()
     end
   end
 
@@ -484,7 +484,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [check: :error] == Existence.get_checks()
+      assert [check: :killed] == Existence.get_checks()
     end
   end
 
@@ -504,7 +504,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [check: :error] == Existence.get_checks()
+      assert [check: :killed] == Existence.get_checks()
     end
   end
 
@@ -525,7 +525,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [check: :ok] == Existence.get_checks()
+      assert [check: :killed] == Existence.get_checks()
     end
   end
 
@@ -546,7 +546,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [check: :ok] == Existence.get_checks()
+      assert [check: :killed] == Existence.get_checks()
     end
   end
 

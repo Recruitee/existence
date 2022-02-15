@@ -6,7 +6,7 @@ defmodule Existence.GenCheckTest do
   setup do
     config = [
       check: %{
-        mfa: {__MODULE__, fn -> :error end, []},
+        mfa: {__MODULE__, :error_fun, []},
         initial_delay: 0
       }
     ]
@@ -16,6 +16,8 @@ defmodule Existence.GenCheckTest do
     Process.sleep(10)
     :ok
   end
+
+  def error_fun(), do: :error
 
   test "get_state/0" do
     assert :error == GenCheck.get_state()
