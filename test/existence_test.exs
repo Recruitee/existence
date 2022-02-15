@@ -22,12 +22,6 @@ defmodule ExistenceTest do
     test "get_checks/0" do
       assert [] == Existence.get_checks()
     end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
-    end
   end
 
   describe "no checks, fsm init state: :ok" do
@@ -41,12 +35,6 @@ defmodule ExistenceTest do
 
     test "get_checks/0" do
       assert [] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
     end
   end
 
@@ -68,17 +56,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :ok] == Existence.get_checks()
     end
   end
 
@@ -99,17 +77,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :ok] == Existence.get_checks()
     end
   end
 
@@ -130,17 +98,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :ok] == Existence.get_checks()
     end
   end
 
@@ -161,17 +119,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :ok] == Existence.get_checks()
     end
   end
 
@@ -193,17 +141,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1" do
-      assert :error == Existence.get_check_state(:check)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :error] == Existence.get_checks()
     end
   end
 
@@ -224,17 +162,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1" do
-      assert :error == Existence.get_check_state(:check)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :error] == Existence.get_checks()
     end
   end
 
@@ -255,17 +183,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1" do
-      assert :error == Existence.get_check_state(:check)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :error] == Existence.get_checks()
     end
   end
 
@@ -286,17 +204,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1" do
-      assert :error == Existence.get_check_state(:check)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :error] == Existence.get_checks()
     end
   end
 
@@ -318,14 +226,9 @@ defmodule ExistenceTest do
       assert :error == Existence.get_state()
     end
 
+    # FIXME
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :error] == Existence.get_checks()
     end
   end
 
@@ -346,14 +249,9 @@ defmodule ExistenceTest do
       assert :error == Existence.get_state()
     end
 
+    # FIXME
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :error] == Existence.get_checks()
     end
   end
 
@@ -374,14 +272,9 @@ defmodule ExistenceTest do
       assert :error == Existence.get_state()
     end
 
+    # FIXME
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :ok] == Existence.get_checks()
     end
   end
 
@@ -402,14 +295,9 @@ defmodule ExistenceTest do
       assert :error == Existence.get_state()
     end
 
+    # FIXME
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :ok] == Existence.get_checks()
     end
   end
 
@@ -430,13 +318,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :error] == Existence.get_checks()
     end
   end
 
@@ -456,13 +338,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :error] == Existence.get_checks()
     end
   end
 
@@ -483,13 +359,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :ok] == Existence.get_checks()
     end
   end
 
@@ -510,13 +380,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :ok] == Existence.get_checks()
     end
   end
 
@@ -537,13 +401,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :error] == Existence.get_checks()
     end
   end
 
@@ -563,13 +421,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :error] == Existence.get_checks()
     end
   end
 
@@ -590,13 +442,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :ok] == Existence.get_checks()
     end
   end
 
@@ -617,13 +463,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :ok] == Existence.get_checks()
     end
   end
 
@@ -644,13 +484,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :error] == Existence.get_checks()
     end
   end
 
@@ -670,13 +504,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :error] == Existence.get_checks()
     end
   end
 
@@ -697,13 +525,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :ok] == Existence.get_checks()
     end
   end
 
@@ -724,13 +546,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check] == Existence.get_checks()
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check: :ok] == Existence.get_checks()
     end
   end
 
@@ -757,18 +573,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :ok == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :ok] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -794,18 +599,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :ok == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :ok] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -831,18 +625,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :ok == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :ok] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -868,18 +651,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :ok == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :ok] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -905,18 +677,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :ok == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :ok] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -942,18 +703,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :ok == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :ok] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -980,18 +730,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :error == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :error, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1017,18 +756,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :error == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :error, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1054,18 +782,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :error == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :error, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1091,18 +808,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :error == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :error, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1128,18 +834,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :error == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :error, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1165,18 +860,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :error == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :error, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1203,18 +887,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1240,18 +913,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1277,18 +939,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1314,18 +965,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1351,18 +991,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1388,18 +1017,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1425,18 +1043,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 
@@ -1462,18 +1069,7 @@ defmodule ExistenceTest do
     end
 
     test "get_checks/0" do
-      assert [:check_1, :check_2] == Existence.get_checks() |> Enum.sort()
-    end
-
-    test "get_check_state/1" do
-      assert :ok == Existence.get_check_state(:check_1)
-      assert :error == Existence.get_check_state(:check_2)
-    end
-
-    test "get_check_state/1 not existing check" do
-      assert_raise MatchError, "no match of right hand side value: []", fn ->
-        Existence.get_check_state(:not_existing)
-      end
+      assert [check_1: :ok, check_2: :error] == Existence.get_checks() |> Enum.sort()
     end
   end
 

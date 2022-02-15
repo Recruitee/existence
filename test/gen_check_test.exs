@@ -22,15 +22,7 @@ defmodule Existence.GenCheckTest do
   end
 
   test "get_checks/0" do
-    assert [:check] = GenCheck.get_checks()
-  end
-
-  test "get_check_state/1" do
-    assert :error == GenCheck.get_check_state(:check)
-
-    assert_raise MatchError, "no match of right hand side value: []", fn ->
-      GenCheck.get_check_state(:not_existing)
-    end
+    assert [check: :error] = GenCheck.get_checks()
   end
 
   test "child_spec/1" do

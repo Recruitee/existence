@@ -23,12 +23,7 @@ defmodule Existence.GenCheck do
   end
 
   def get_checks(),
-    do: @ets_table_name |> :ets.match({{:check_state, :"$1"}, :_}) |> List.flatten()
-
-  def get_check_state(check_id) do
-    [{{:check_state, ^check_id}, state}] = :ets.lookup(@ets_table_name, {:check_state, check_id})
-    state
-  end
+    do: :ets.select(@ets_table_name, [{{{:check_state, :"$1"}, :"$2"}, [], [{{:"$1", :"$2"}}]}])
 
   def child_spec(init_arg),
     do: Supervisor.child_spec(%{id: __MODULE__, start: {__MODULE__, :start_link, [init_arg]}}, [])

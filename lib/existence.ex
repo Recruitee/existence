@@ -7,7 +7,6 @@ defmodule Existence do
 
   defdelegate get_state(), to: GenCheck
   defdelegate get_checks(), to: GenCheck
-  defdelegate get_check_state(check_id), to: GenCheck
 
   @doc false
   defdelegate child_spec(init_arg), to: GenCheck
