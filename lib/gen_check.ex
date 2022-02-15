@@ -73,12 +73,10 @@ defmodule Existence.GenCheck do
 
   def unhealthy(:info, {:check_result, result, check_id}, data) do
     set_check_state(check_id, result)
-    data = update_check_result(result, check_id, data)
 
-    case Enum.find(data, :ok, fn {_check_id, params} -> Map.fetch!(params, :state) != :ok end) do
-      :ok -> {:next_state, :healthy, data}
-      _err -> {:keep_state, data}
-    end
+    if is_ets_healthy?(),
+      do: {:next_state, :healthy, data},
+      else: {:keep_state, data}
   end
 
   def unhealthy(:info, {:DOWN, ref, :process, pid, _status}, data) do
@@ -97,7 +95,6 @@ defmodule Existence.GenCheck do
 
   def healthy(:info, {:check_result, result, check_id}, data) do
     set_check_state(check_id, result)
-    data = update_check_result(result, check_id, data)
 
     case result do
       :ok -> {:keep_state, data}
@@ -119,15 +116,6 @@ defmodule Existence.GenCheck do
     do: {:keep_state, spawn_check(check_id, data)}
 
   # ________helpers
-  defp update_check_result(result, check_id, data) do
-    new_params =
-      data
-      |> Keyword.fetch!(check_id)
-      |> Map.put(:state, result)
-
-    Keyword.put(data, check_id, new_params)
-  end
-
   defp maybe_respawn_check(ref, pid, data) do
     check = Enum.find(data, nil, fn {_check_id, params} -> {pid, ref} == params.spawn_proc end)
 
@@ -161,4 +149,13 @@ defmodule Existence.GenCheck do
 
   defp set_check_state(check_id, result),
     do: :ets.insert(@ets_table_name, {{:check_state, check_id}, result})
+
+  def is_ets_healthy?() do
+    case :ets.select(@ets_table_name, [
+           {{{:check_state, :"$1"}, :"$2"}, [{:"/=", :"$2", :ok}], [:"$2"]}
+         ]) do
+      [] -> true
+      _ -> false
+    end
+  end
 end
