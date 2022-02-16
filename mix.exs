@@ -1,29 +1,50 @@
 defmodule Existence.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/Recruitee/existence"
+  @version "0.1.0"
+
   def project do
     [
       app: :existence,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      docs: docs(),
+      package: package(),
+      name: "Existence",
+      description: "Asynchronous dependency health checks library"
     ]
   end
 
-  # Run "mix help compile.app" to learn about applications.
   def application do
-    [
-      extra_applications: [:logger]
-    ]
+    [extra_applications: [:logger]]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:plug, "~> 1.13"}
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:plug, "~> 1.13"},
+      {:ex_doc, "~> 0.28.0", only: :dev, runtime: false}
+    ]
+  end
+
+  defp package do
+    [
+      files: ~w(lib .formatter.exs mix.exs CHANGELOG.md README.md),
+      maintainers: ["Recruitee", "Andrzej Magdziarz"],
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => @source_url}
+    ]
+  end
+
+  defp docs do
+    [
+      extras: ["README.md"],
+      main: "readme",
+      source_url: @source_url,
+      source_ref: "v#{@version}",
+      skip_undefined_reference_warnings_on: ["CHANGELOG.md"]
     ]
   end
 end
