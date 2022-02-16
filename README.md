@@ -51,9 +51,9 @@ iex> Existence.get_state()
 :ok
 ```
 
-List individual checks with their current states:
+List dependencies checks with their current states:
 ```elixir
-iex> Existence.get_checks
+iex> Existence.get_checks()
 [check_1: :ok, check_2: :ok]
 ```
 
