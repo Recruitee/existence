@@ -1,6 +1,54 @@
 defmodule Existence.Plug do
   @moduledoc """
-  Plug sending a health check status response.
+  Plug sending information about a health-check state as a response.
+
+
+  Plug sends a plain text response dependent on the overall health-check state.
+
+  Response http status code and body are configurable with the following keys:
+  * `ok_status` - response status code for the healthy state. Default: `200`.
+  * `ok_body` - response body for the healthy state. Default: `"OK"`.
+  * `error_status` - response status code for the unhealthy state. Default: `503`.
+  * `error_body` - response body for the unhealthy state. Default: `"Service Unavailable"`.
+
+
+  Example module use with `Plug.Router.get/3` inside `/` route scope with custom unhealthy
+  state response:
+  ```elixir
+  defmodule MyAppWeb.Router do
+  use MyAppWeb, :router
+
+    #...
+    scope "/", MyAppWeb do
+      pipe_through(:browser)
+
+      get(
+        "/healthcheck",
+        Existence.Plug,
+        [error_status: 500, error_body: "Internal Server Error"],
+        alias: false
+      )
+    end
+  end
+
+  ```
+  Notice `alias: false` use to disable scoping on an external `Existence.Plug`.
+
+  Above code example will produce following http responses:
+  * healthy state:
+  ```
+  $> curl -i http://127.0.0.1:4000/healthcheck
+  HTTP/1.1 200 OK
+  ...
+  OK
+  ```
+  * unhealthy state:
+  ```
+  $> curl -i http://127.0.0.1:4000/healthcheck
+  HTTP/1.1 500 Internal Server Error
+  ...
+  Internal Server Error
+  ```
   """
 
   @behaviour Plug

@@ -4,9 +4,10 @@ Asynchronous dependency health checks library.
 
 ## Features
 * User defined dependencies checks with flexible settings.
-* Checks are executed asynchronously as isolated processes.
+* Dependencies checks functions are executed asynchronously as isolated processes.
 * Built in `Plug` module providing customizable response for a http health-check endpoint.
-* Practically unlimited scalability due to ETS table use as an API "interface".
+* Checks states are stored in an ETS table, which means practically unlimited requests per second
+  processing capacity.
 
 ## Installation
 Add library to application dependencies:
@@ -19,7 +20,7 @@ end
 ```
 
 ## Usage
-Add library child to your application supervisor:
+Start library child in your application supervisor:
 ```elixir
 defmodule MyApp.Application do
   use Application
@@ -33,7 +34,7 @@ defmodule MyApp.Application do
 end
 ```
 
-Configure checks in your application configuration file, for example:
+Configure dependencies checks in your application configuration file, for example:
 ```elixir
 #config/config.exs
 config :my_app, Existence,
@@ -51,7 +52,7 @@ iex> Existence.get_state()
 :ok
 ```
 
-List dependencies checks with their current states:
+List dependencies checks current states:
 ```elixir
 iex> Existence.get_checks()
 [check_1: :ok, check_2: :ok]

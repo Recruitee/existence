@@ -1,6 +1,5 @@
 defmodule ExistenceTest do
   use ExUnit.Case, async: true
-  doctest Existence
 
   def check_ok(), do: :ok
   def check_error(), do: :error
