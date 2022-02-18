@@ -5,7 +5,7 @@ Asynchronous dependency health checks library.
 ## Features
 * User defined dependencies checks with flexible settings.
 * Dependencies checks functions are executed asynchronously as isolated processes.
-* Built in `Plug` module providing customizable response for a http health-check endpoint.
+* Built-in `Plug` module providing customizable response for a http health-check endpoint.
 * Checks states are stored in an ETS table, which means practically unlimited requests per second
   processing capacity.
 
@@ -46,13 +46,21 @@ config :my_app, Existence,
   }
 ```
 
-Get current health-check state:
+Declare your dependencies checks functions:
+```elixir
+defmodule MyApp.Checks do
+  def check_1(), do: :ok
+  def check_2(), do: :ok
+end
+```
+
+Get current overall health-check state:
 ```elixir
 iex> Existence.get_state()
 :ok
 ```
 
-List dependencies checks current states:
+List individual dependencies checks current states:
 ```elixir
 iex> Existence.get_checks()
 [check_1: :ok, check_2: :ok]
