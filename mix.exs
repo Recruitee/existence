@@ -24,7 +24,7 @@ defmodule Existence.MixProject do
 
   defp deps do
     [
-      {:plug, "~> 1.13"},
+      {:plug, "~> 1.10"},
       {:ex_doc, "~> 0.28.0", only: :dev, runtime: false}
     ]
   end
