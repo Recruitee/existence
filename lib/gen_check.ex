@@ -44,13 +44,9 @@ defmodule Existence.GenCheck do
 
     data =
       Mix.Project.config()
-      |> IO.inspect()
       |> Keyword.fetch!(:app)
-      |> IO.inspect()
       |> Application.get_env(Existence, [])
-      |> IO.inspect()
       |> Enum.map(fn {check_id, params} -> {check_id, struct!(__MODULE__, params)} end)
-      |> IO.inspect()
 
     Enum.each(data, fn {check_id, params} ->
       set_check_state(check_id, Map.fetch!(params, :state))
