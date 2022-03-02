@@ -1,18 +1,25 @@
 defmodule Existence.Plug do
   @moduledoc """
-  Plug sending information about a health-check state as a response.
+  Plug responding with a health-check state.
 
+  Plug sends a `text/plain` response depending on the `Existence` overall health-check state
+  returned by an `Existence.get_state/1` function.
 
-  Plug sends a plain text response dependent on the overall health-check state.
+  ## Configuration
+  Plug is configured with a keyword list.
 
-  Response http status code and body are configurable with the following keys:
+  Plug response http status code and body are configurable with the following keys:
   * `ok_status` - response status code for the healthy state. Default: `200`.
   * `ok_body` - response body for the healthy state. Default: `"OK"`.
   * `error_status` - response status code for the unhealthy state. Default: `503`.
   * `error_body` - response body for the unhealthy state. Default: `"Service Unavailable"`.
 
+  Additionally `Existence` instance can be selected with a `:name` key.
+  If `:name` key is not set, Plug will use a default instance: `name: Existence`.
+  Setting instance name is described in the `Existence` module documentation.
 
-  Example module use with `Plug.Router.get/3` inside `/` route scope with custom unhealthy
+  ## Usage
+  Example module use with a `Plug.Router.get/3` inside `/` route scope with a custom unhealthy
   state response:
   ```elixir
   defmodule MyAppWeb.Router do
@@ -32,9 +39,9 @@ defmodule Existence.Plug do
   end
 
   ```
-  Notice `alias: false` use to disable scoping on an external `Existence.Plug`.
+  Notice `alias: false` use to disable scoping on an external `Existence.Plug` in `get/3` function.
 
-  Above code example will produce following http responses:
+  Code example above will produce following http responses:
   * healthy state:
   ```
   $> curl -i http://127.0.0.1:4000/healthcheck
@@ -52,8 +59,8 @@ defmodule Existence.Plug do
   """
 
   @behaviour Plug
-  import Plug.Conn
-  alias Existence.GenCheck
+
+  import Plug.Conn, only: [put_resp_content_type: 2, send_resp: 3, halt: 1]
 
   @ok_status 200
   @ok_body "OK"
@@ -65,8 +72,14 @@ defmodule Existence.Plug do
 
   @doc false
   def call(conn, opts \\ []) do
+    health_check_state =
+      case Keyword.fetch(opts, :name) do
+        {:ok, name} -> Existence.get_state(name)
+        :error -> Existence.get_state()
+      end
+
     {status, body} =
-      case GenCheck.get_state() do
+      case health_check_state do
         :ok ->
           {Keyword.get(opts, :ok_status, @ok_status), Keyword.get(opts, :ok_body, @ok_body)}
 
