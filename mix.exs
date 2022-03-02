@@ -8,7 +8,7 @@ defmodule Existence.MixProject do
     [
       app: :existence,
       version: @version,
-      elixir: "~> 1.12",
+      elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: docs(),
