@@ -1,5 +1,8 @@
 # Existence
 
+[![Hex Version](https://img.shields.io/hexpm/v/existence)](https://hex.pm/packages/existence)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen)](https://hexdocs.pm/existence)
+
 Asynchronous dependency health checks library.
 
 ## Features
@@ -16,7 +19,7 @@ Add `Existence` library to your application dependencies:
 ```elixir
 def deps do
   [
-    {:existence, github: "recruitee/existence", branch: "master"}
+    {:existence, "~> 0.1.1"}
   ]
 end
 ```
