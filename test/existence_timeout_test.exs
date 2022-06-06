@@ -23,8 +23,16 @@ defmodule Existence.TimeoutTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: :killed] == Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: :killed] == Existence.get_checks!()
     end
   end
 
@@ -47,8 +55,16 @@ defmodule Existence.TimeoutTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: :killed] == Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: :killed] == Existence.get_checks!()
     end
   end
 
@@ -71,8 +87,16 @@ defmodule Existence.TimeoutTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: :killed] == Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: :killed] == Existence.get_checks!()
     end
   end
 
@@ -95,8 +119,16 @@ defmodule Existence.TimeoutTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: :killed] == Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: :killed] == Existence.get_checks!()
     end
   end
 
@@ -120,8 +152,16 @@ defmodule Existence.TimeoutTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: :killed] == Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: :killed] == Existence.get_checks!()
     end
   end
 
@@ -145,8 +185,16 @@ defmodule Existence.TimeoutTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: :killed] == Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: :killed] == Existence.get_checks!()
     end
   end
 
@@ -169,8 +217,16 @@ defmodule Existence.TimeoutTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: :killed] == Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: :killed] == Existence.get_checks!()
     end
   end
 
@@ -194,8 +250,16 @@ defmodule Existence.TimeoutTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: :killed] == Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: :killed] == Existence.get_checks!()
     end
   end
 
@@ -219,8 +283,16 @@ defmodule Existence.TimeoutTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: :killed] == Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: :killed] == Existence.get_checks!()
     end
   end
 end

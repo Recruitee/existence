@@ -9,14 +9,18 @@ defmodule Existence.Plug do
   Plug is configured with a keyword list.
 
   Plug response http status code and body are configurable with the following keys:
-  * `ok_status` - response status code for the healthy state. Default: `200`.
-  * `ok_body` - response body for the healthy state. Default: `"OK"`.
-  * `error_status` - response status code for the unhealthy state. Default: `503`.
-  * `error_body` - response body for the unhealthy state. Default: `"Service Unavailable"`.
+  * `:ok_status` - response status code for the healthy state. Default: `200`.
+  * `:ok_body` - response body for the healthy state. Default: `"OK"`.
+  * `:error_status` - response status code for the unhealthy state. Default: `503`.
+  * `:error_body` - response body for the unhealthy state. Default: `"Service Unavailable"`.
 
-  Additionally `Existence` instance can be selected with a `:name` key.
-  If `:name` key is not set, Plug will use a default instance: `name: Existence`.
-  Setting instance name is described in the `Existence` module documentation.
+  Other configuration options:
+  * `:raising?` - if set to `true` plug will use `Existence.get_state!/1` raising function to
+    get an overall health-check state.
+    If set to false, not raising `Existence.get_state/1` function will be used.
+    Default: `false`.
+  * `:name` - `Existence` name same as a name used when starting instance with supervision tree.
+    Default: `Existence`.
 
   ## Usage
   Example module use with a `Plug.Router.get/3` inside `/` route scope with a custom unhealthy
@@ -67,16 +71,20 @@ defmodule Existence.Plug do
   @error_status 503
   @error_body "Service Unavailable"
 
+  @default_raising? false
+  @default_name Existence
+
   @doc false
   def init(opts \\ []), do: opts
 
   @doc false
   def call(conn, opts \\ []) do
+    name = Keyword.get(opts, :name, @default_name)
+
     health_check_state =
-      case Keyword.fetch(opts, :name) do
-        {:ok, name} -> Existence.get_state(name)
-        :error -> Existence.get_state()
-      end
+      if Keyword.get(opts, :raising?, @default_raising?),
+        do: Existence.get_state!(name),
+        else: Existence.get_state(name)
 
     {status, body} =
       case health_check_state do

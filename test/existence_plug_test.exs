@@ -35,7 +35,7 @@ defmodule Existence.PlugTest do
     error_body: "Error_custom"
   ]
 
-  describe "initial FSM state: :error" do
+  describe "standard router with initial FSM state: :error" do
     setup do
       start_supervised!(Existence)
       :ok
@@ -70,7 +70,7 @@ defmodule Existence.PlugTest do
     end
   end
 
-  describe "initial FSM state: :ok" do
+  describe "standard router with initial FSM state: :ok" do
     setup do
       start_supervised!({Existence, state: :ok})
       :ok
@@ -102,6 +102,50 @@ defmodule Existence.PlugTest do
       assert conn.state == :sent
       assert conn.status == @custom_response[:ok_status]
       assert conn.resp_body == @custom_response[:ok_body]
+    end
+  end
+
+  describe ":name option" do
+    setup do
+      start_supervised!({Existence, state: :ok, name: CustomName})
+      :ok
+    end
+
+    test "default name" do
+      conn = conn(:get, "/") |> Existence.Plug.call([])
+      assert conn.status == @default_response[:error_status]
+      assert conn.resp_body == @default_response[:error_body]
+    end
+
+    test "custom name" do
+      conn = conn(:get, "/") |> Existence.Plug.call(name: CustomName)
+      assert conn.status == @default_response[:ok_status]
+      assert conn.resp_body == @default_response[:ok_body]
+    end
+
+    test "invalid name" do
+      conn = conn(:get, "/") |> Existence.Plug.call(name: InvalidName)
+      assert conn.status == @default_response[:error_status]
+      assert conn.resp_body == @default_response[:error_body]
+    end
+  end
+
+  describe ":raising? option set to true" do
+    setup do
+      start_supervised!({Existence, state: :ok})
+      :ok
+    end
+
+    test "it raises on invalid name" do
+      assert_raise ArgumentError, fn ->
+        conn(:get, "/") |> Existence.Plug.call(name: InvalidName, raising?: true)
+      end
+    end
+
+    test "it doesn't raise on valid name" do
+      conn = conn(:get, "/") |> Existence.Plug.call(raising?: true)
+      assert conn.status == @default_response[:ok_status]
+      assert conn.resp_body == @default_response[:ok_body]
     end
   end
 end

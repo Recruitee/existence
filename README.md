@@ -53,6 +53,9 @@ defmodule MyApp.Checks do
 end
 ```
 
+Check functions above are for illustrative purposes only, please refer to the `Existence` module
+documentation for more realistic dependencies checks examples.
+
 Configure your Phoenix router to respond to the `/healthcheck` endpoint requests using for example
 `Plug.Router.forward/2`:
 ```elixir
