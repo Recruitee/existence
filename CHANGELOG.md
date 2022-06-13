@@ -1,4 +1,4 @@
-## v0.2.0 unreleased
+## v0.2.0 [2022-06-13]
 
 ### Enhancements
 * [Existence] Added `get_state!/1` and `get_checks!/1`.
