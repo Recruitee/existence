@@ -22,9 +22,18 @@ defmodule Existence.RaiseTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
                Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks!()
     end
   end
 
@@ -46,9 +55,18 @@ defmodule Existence.RaiseTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
                Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks!()
     end
   end
 
@@ -70,9 +88,18 @@ defmodule Existence.RaiseTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
                Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks!()
     end
   end
 
@@ -94,9 +121,18 @@ defmodule Existence.RaiseTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
                Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks!()
     end
   end
 
@@ -119,9 +155,18 @@ defmodule Existence.RaiseTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
                Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks!()
     end
   end
 
@@ -144,9 +189,18 @@ defmodule Existence.RaiseTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
                Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks!()
     end
   end
 
@@ -168,9 +222,18 @@ defmodule Existence.RaiseTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
                Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks!()
     end
   end
 
@@ -193,9 +256,18 @@ defmodule Existence.RaiseTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
                Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks!()
     end
   end
 
@@ -218,9 +290,18 @@ defmodule Existence.RaiseTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
                Existence.get_checks()
+    end
+
+    test "get_checks!/0" do
+      assert [check: {%RuntimeError{message: "check_raise"}, _stacktrace}] =
+               Existence.get_checks!()
     end
   end
 end

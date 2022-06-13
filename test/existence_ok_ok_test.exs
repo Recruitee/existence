@@ -28,8 +28,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -55,8 +63,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -83,8 +99,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -111,8 +135,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -139,8 +171,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -166,8 +206,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -194,8 +242,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -222,8 +278,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -250,8 +314,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -277,8 +349,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -305,8 +385,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -333,8 +421,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -361,8 +457,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -388,8 +492,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -416,8 +528,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -445,8 +565,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -474,8 +602,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -503,8 +639,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -531,8 +675,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -560,8 +712,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -589,8 +749,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -618,8 +786,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -646,8 +822,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -675,8 +859,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -704,8 +896,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -733,8 +933,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -760,8 +968,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -788,8 +1004,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -817,8 +1041,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -846,8 +1078,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -875,8 +1115,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -903,8 +1151,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -932,8 +1188,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -961,8 +1225,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -990,8 +1262,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -1018,8 +1298,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -1047,8 +1335,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -1076,8 +1372,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 
@@ -1105,8 +1409,16 @@ defmodule Existence.OkOkTest do
       assert @state == Existence.get_state()
     end
 
+    test "get_state!/0" do
+      assert @state == Existence.get_state!()
+    end
+
     test "get_checks/0" do
       assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks() |> Enum.sort()
+    end
+
+    test "get_checks!/0" do
+      assert [check_1: check_1(), check_2: check_2()] == Existence.get_checks!() |> Enum.sort()
     end
   end
 end

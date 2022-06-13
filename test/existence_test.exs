@@ -80,11 +80,19 @@ defmodule ExistenceTest do
 
   describe "Existence is not started" do
     test "get_state/1" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state() end
+      assert Existence.get_state() == :undefined
+    end
+
+    test "get_state!/1" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!() end
     end
 
     test "get_checks/1" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks() end
+      assert Existence.get_checks() == :undefined
+    end
+
+    test "get_checks!/1" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!() end
     end
   end
 
@@ -97,24 +105,48 @@ defmodule ExistenceTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/1, default name" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/1, default name" do
       assert [] == Existence.get_checks()
+    end
+
+    test "get_checks!/1, default name" do
+      assert [] == Existence.get_checks!()
     end
 
     test "get_state/1, valid name" do
       assert :error == Existence.get_state(Existence)
     end
 
+    test "get_state!/1, valid name" do
+      assert :error == Existence.get_state!(Existence)
+    end
+
     test "get_checks/1, valid name" do
       assert [] == Existence.get_checks(Existence)
     end
 
+    test "get_checks!/1, valid name" do
+      assert [] == Existence.get_checks!(Existence)
+    end
+
     test "get_state/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_state(Invalid) == :undefined
+    end
+
+    test "get_state!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!(Invalid) end
     end
 
     test "get_checks/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_checks(Invalid) == :undefined
+    end
+
+    test "get_checks!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!(Invalid) end
     end
   end
 
@@ -127,24 +159,48 @@ defmodule ExistenceTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/1, default name" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/1, default name" do
       assert [] == Existence.get_checks()
+    end
+
+    test "get_checks!/1, default name" do
+      assert [] == Existence.get_checks!()
     end
 
     test "get_state/1, valid name" do
       assert :error == Existence.get_state(Existence)
     end
 
+    test "get_state!/1, valid name" do
+      assert :error == Existence.get_state!(Existence)
+    end
+
     test "get_checks/1, valid name" do
       assert [] == Existence.get_checks(Existence)
     end
 
+    test "get_checks!/1, valid name" do
+      assert [] == Existence.get_checks!(Existence)
+    end
+
     test "get_state/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_state(Invalid) == :undefined
+    end
+
+    test "get_state!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!(Invalid) end
     end
 
     test "get_checks/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_checks(Invalid) == :undefined
+    end
+
+    test "get_checks!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!(Invalid) end
     end
   end
 
@@ -154,27 +210,51 @@ defmodule ExistenceTest do
     end
 
     test "get_state/1, default name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state() end
+      assert Existence.get_state() == :undefined
+    end
+
+    test "get_state!/1, default name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!() end
     end
 
     test "get_checks/1, default name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state() end
+      assert Existence.get_checks() == :undefined
+    end
+
+    test "get_checks!/1, default name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!() end
     end
 
     test "get_state/1, valid name" do
       assert :error == Existence.get_state(CustomName)
     end
 
+    test "get_state!/1, valid name" do
+      assert :error == Existence.get_state!(CustomName)
+    end
+
     test "get_checks/1, valid name" do
       assert [] == Existence.get_checks(CustomName)
     end
 
+    test "get_checks!/1, valid name" do
+      assert [] == Existence.get_checks!(CustomName)
+    end
+
     test "get_state/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_state(Invalid) == :undefined
+    end
+
+    test "get_state!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!(Invalid) end
     end
 
     test "get_checks/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_checks(Invalid) == :undefined
+    end
+
+    test "get_checks!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!(Invalid) end
     end
   end
 
@@ -184,27 +264,51 @@ defmodule ExistenceTest do
     end
 
     test "get_state/1, default name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state() end
+      assert Existence.get_state() == :undefined
+    end
+
+    test "get_state!/1, default name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!() end
     end
 
     test "get_checks/1, default name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state() end
+      assert Existence.get_checks() == :undefined
+    end
+
+    test "get_checks!/1, default name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!() end
     end
 
     test "get_state/1, valid name" do
       assert :error == Existence.get_state(CustomName)
     end
 
+    test "get_state!/1, valid name" do
+      assert :error == Existence.get_state!(CustomName)
+    end
+
     test "get_checks/1, valid name" do
       assert [] == Existence.get_checks(CustomName)
     end
 
+    test "get_checks!/1, valid name" do
+      assert [] == Existence.get_checks!(CustomName)
+    end
+
     test "get_state/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_state(Invalid) == :undefined
+    end
+
+    test "get_state!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!(Invalid) end
     end
 
     test "get_checks/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_checks(Invalid) == :undefined
+    end
+
+    test "get_checks!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!(Invalid) end
     end
   end
 
@@ -217,24 +321,48 @@ defmodule ExistenceTest do
       assert :error == Existence.get_state()
     end
 
+    test "get_state!/1, default name" do
+      assert :error == Existence.get_state!()
+    end
+
     test "get_checks/1, default name" do
       assert [] == Existence.get_checks()
+    end
+
+    test "get_checks!/1, default name" do
+      assert [] == Existence.get_checks!()
     end
 
     test "get_state/1, valid name" do
       assert :error == Existence.get_state(Existence)
     end
 
+    test "get_state!/1, valid name" do
+      assert :error == Existence.get_state!(Existence)
+    end
+
     test "get_checks/1, valid name" do
       assert [] == Existence.get_checks(Existence)
     end
 
+    test "get_checks!/1, valid name" do
+      assert [] == Existence.get_checks!(Existence)
+    end
+
     test "get_state/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_state(Invalid) == :undefined
+    end
+
+    test "get_state!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!(Invalid) end
     end
 
     test "get_checks/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_checks(Invalid) == :undefined
+    end
+
+    test "get_checks!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!(Invalid) end
     end
   end
 
@@ -247,24 +375,48 @@ defmodule ExistenceTest do
       assert :ok == Existence.get_state()
     end
 
+    test "get_state!/1, default name" do
+      assert :ok == Existence.get_state!()
+    end
+
     test "get_checks/1, default name" do
       assert [] == Existence.get_checks()
+    end
+
+    test "get_checks!/1, default name" do
+      assert [] == Existence.get_checks!()
     end
 
     test "get_state/1, valid name" do
       assert :ok == Existence.get_state(Existence)
     end
 
+    test "get_state!/1, valid name" do
+      assert :ok == Existence.get_state!(Existence)
+    end
+
     test "get_checks/1, valid name" do
       assert [] == Existence.get_checks(Existence)
     end
 
+    test "get_checks!/1, valid name" do
+      assert [] == Existence.get_checks!(Existence)
+    end
+
     test "get_state/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_state(Invalid) == :undefined
+    end
+
+    test "get_state!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!(Invalid) end
     end
 
     test "get_checks/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_checks(Invalid) == :undefined
+    end
+
+    test "get_checks!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!(Invalid) end
     end
   end
 
@@ -274,27 +426,51 @@ defmodule ExistenceTest do
     end
 
     test "get_state/1, default name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state() end
+      assert Existence.get_state() == :undefined
+    end
+
+    test "get_state!/1, default name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!() end
     end
 
     test "get_checks/1, default name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state() end
+      assert Existence.get_checks() == :undefined
+    end
+
+    test "get_checks!/1, default name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!() end
     end
 
     test "get_state/1, valid name" do
       assert :ok == Existence.get_state(CustomName)
     end
 
+    test "get_state!/1, valid name" do
+      assert :ok == Existence.get_state!(CustomName)
+    end
+
     test "get_checks/1, valid name" do
       assert [] == Existence.get_checks(CustomName)
     end
 
+    test "get_checks!/1, valid name" do
+      assert [] == Existence.get_checks!(CustomName)
+    end
+
     test "get_state/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_state(Invalid) == :undefined
+    end
+
+    test "get_state!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!(Invalid) end
     end
 
     test "get_checks/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_checks(Invalid) == :undefined
+    end
+
+    test "get_checks!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!(Invalid) end
     end
   end
 
@@ -304,27 +480,51 @@ defmodule ExistenceTest do
     end
 
     test "get_state/1, default name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state() end
+      assert Existence.get_state() == :undefined
+    end
+
+    test "get_state!/1, default name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!() end
     end
 
     test "get_checks/1, default name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state() end
+      assert Existence.get_checks() == :undefined
+    end
+
+    test "get_checks!/1, default name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!() end
     end
 
     test "get_state/1, valid name" do
       assert :ok == Existence.get_state(CustomName)
     end
 
+    test "get_state!/1, valid name" do
+      assert :ok == Existence.get_state!(CustomName)
+    end
+
     test "get_checks/1, valid name" do
       assert [] == Existence.get_checks(CustomName)
     end
 
+    test "get_checks!/1, valid name" do
+      assert [] == Existence.get_checks!(CustomName)
+    end
+
     test "get_state/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_state(Invalid) == :undefined
+    end
+
+    test "get_state!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state!(Invalid) end
     end
 
     test "get_checks/1, invalid name" do
-      assert_raise ArgumentError, @ets_error, fn -> Existence.get_state(Invalid) end
+      assert Existence.get_checks(Invalid) == :undefined
+    end
+
+    test "get_checks!/1, invalid name" do
+      assert_raise ArgumentError, @ets_error, fn -> Existence.get_checks!(Invalid) end
     end
   end
 end

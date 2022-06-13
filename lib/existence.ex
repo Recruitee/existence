@@ -21,14 +21,17 @@ defmodule Existence do
 
   Current dependencies checks functions results and current overall health-check state are stored
   in an ETS table.
-  Whenever user executes any of available state getters, `get_state/1` or `get_checks/1`,
-  request is made against ETS table which has `:read_concurrency` set to `true`.
+  Whenever user executes any of available state getters, request is made against ETS table which
+  has `:read_concurrency` set to `true`.
   In practice it means that library can handle huge numbers of requests per second
   without blocking any other processes.
 
-  Module provides two functions to access checks states:
-  * `get_state/1` to get overall health-check state,
-  * `get_checks/1` to get dependencies checks states.
+  Module provides few functions to access checks states:
+  * `get_state/1` and `get_state!/1` to get overall health-check state,
+  * `get_checks/1` and `get_checks!/1` to get dependencies checks states.
+
+  Functions with bangs are negligibly cheaper computationally because they don't check if ETS table
+  storing Existence state exists and they will raise if such table doesn't exist.
 
   ## Usage
   After defining dependencies checks parameters, `Existence` can be started using
@@ -68,8 +71,8 @@ defmodule Existence do
   `:id` and `:name`, for example:
   ```elixir
   children = [
-    {Existence, id: ExistenceReadiness, name: ReadinessCheck},
-    {Existence, name: {:local, LivenessCheck}}
+    {Existence, checks: readiness_checks,  id: ExistenceReadiness, name: ReadinessCheck},
+    {Existence, checks: liveness_checks, name: {:local, LivenessCheck}}
   ]
   ```
 
@@ -83,8 +86,8 @@ defmodule Existence do
   without registration.
   If defined as a `{:local, atom()}` tuple, `:gen_statem.start_link/4` is invoked and process is
   registered locally with a given name.
-  Key value is used to select `Existence` instance when running `get_state/1` or `get_checks/1`.
-  Default: `Existence`.
+  Key value is used to select `Existence` instance when running any of the state getters,
+  for example: `get_state(CustomName)`. Default: `Existence`.
   * `:checks` - keyword list with user defined dependencies checks parameters, see description
   below for details. Default: `[]`.
   * `:state` - initial overall `Existence` instance health-check state. Default: `:error`.
@@ -160,9 +163,6 @@ defmodule Existence do
     spawn_proc: {nil, nil}
   ]
 
-  # TODO decide if ets_exists?/1 should be executed on each get_* call
-  # def ets_exists?(table \\ @ets_table_name), do: :ets.whereis(table) != :undefined
-
   @doc """
   Get dependencies checks states.
 
@@ -177,8 +177,7 @@ defmodule Existence do
   Dependency check function result equal to an `:ok` atom means healthy state, any other term is
   associated with an unhealthy state.
 
-  Function will raise with an `ArgumentError` exception if `Existence` instance `name`
-  doesn't exist.
+  Function returns `:undefined` if `name` instance doesn't exist.
 
   ##### Example:
   ```elixir
@@ -188,12 +187,39 @@ defmodule Existence do
 
   ```
   iex> Existence.get_checks(NotExisting)
-  ** (ArgumentError) errors were found at the given arguments:
+  :undefined
   ```
 
   """
-  @spec get_checks(name :: atom()) :: [] | [key: :ok | any()]
+  @spec get_checks(name :: atom()) :: [] | [key: :ok | any()] | :undefined
   def get_checks(name \\ __MODULE__) do
+    tbl = ets_table_name(name)
+
+    case :ets.whereis(tbl) do
+      :undefined -> :undefined
+      _ -> :ets.select(tbl, [{{{:check_state, :"$1"}, :"$2"}, [], [{{:"$1", :"$2"}}]}])
+    end
+  end
+
+  @doc """
+  Same as `get_checks/1` but raises on error.
+
+  Function will raise with an `ArgumentError` exception if `Existence` instance `name`
+  doesn't exist.
+
+  ##### Example:
+  ```elixir
+  iex> Existence.get_checks!()
+  [check_1: :ok, check_2: :ok]
+  ```
+
+  ```elixir
+  iex> Existence.get_checks!(NotExisting)
+  ** (ArgumentError) errors were found at the given arguments:
+  ```
+  """
+  @spec get_checks!(name :: atom()) :: [] | [key: :ok | any()]
+  def get_checks!(name \\ __MODULE__) do
     name
     |> ets_table_name()
     |> :ets.select([{{{:check_state, :"$1"}, :"$2"}, [], [{{:"$1", :"$2"}}]}])
@@ -208,11 +234,11 @@ defmodule Existence do
   (`Existence`) is returned.
 
   Function returns an `:ok` atom when overall health-check state is healthy and an `:error` atom
-  otherwise.
+  when state is unhealthy.
   Overall health-check state is healthy only when all dependencies health checks are healthy.
 
-  Function will raise with an `ArgumentError` exception if `Existence` instance `name`
-  doesn't exist.
+  Function returns `:undefined` if `name` instance doesn't exist.
+
 
   ##### Example:
   ```elixir
@@ -222,11 +248,39 @@ defmodule Existence do
 
   ```elixir
   iex> Existence.get_state(NotExisting)
+  :undefined
+  ```
+  """
+  @spec get_state(name :: atom()) :: :ok | :error | :undefined
+  def get_state(name \\ __MODULE__) do
+    with tbl <- ets_table_name(name),
+         tid when tid not in [:undefined] <- :ets.whereis(tbl),
+         [{:state, state}] <- :ets.lookup(tbl, :state) do
+      state
+    else
+      _ -> :undefined
+    end
+  end
+
+  @doc """
+  Same as `get_state/1` but raises on error.
+
+  Function will raise with an `ArgumentError` exception if `Existence` instance `name`
+  doesn't exist.
+
+  ##### Example:
+  ```elixir
+  iex> Existence.get_state!()
+  :ok
+  ```
+
+  ```elixir
+  iex> Existence.get_state!(NotExisting)
   ** (ArgumentError) errors were found at the given arguments:
   ```
   """
-  @spec get_state(name :: atom()) :: :ok | :error
-  def get_state(name \\ __MODULE__) do
+  @spec get_state!(name :: atom()) :: :ok | :error
+  def get_state!(name \\ __MODULE__) do
     [{:state, state}] =
       name
       |> ets_table_name()
