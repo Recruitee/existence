@@ -91,6 +91,11 @@ defmodule Existence do
   * `:checks` - keyword list with user defined dependencies checks parameters, see description
   below for details. Default: `[]`.
   * `:state` - initial overall `Existence` instance health-check state. Default: `:error`.
+  * `:on_state_change` - MFA tuple pointing at user function which will be executed on the overall
+    state change.
+    User function should be of two arity. As a first argument it will receive current state as
+    `:ok | :error` atom. As a second argument function will receive static arg given in the MFA tuple.
+    Default: `nil`.
 
   Dependencies checks are defined using a keyword list with configuration parameters defined
   as a maps.
@@ -331,7 +336,11 @@ defmodule Existence do
       Process.send_after(self(), {:spawn_check, check_id}, Map.fetch!(params, :initial_delay))
     end)
 
-    data = %{checks: checks, ets_tab: ets_tab}
+    data = %{
+      checks: checks,
+      ets_tab: ets_tab,
+      on_state_change: Keyword.get(args, :on_state_change)
+    }
 
     case Keyword.get(args, :state, :error) do
       :ok -> {:ok, :healthy, data}
@@ -439,11 +448,15 @@ defmodule Existence do
     Map.put(data, :checks, checks)
   end
 
-  defp set_state(%{ets_tab: ets_tab}, state) do
-    case state do
-      :healthy -> :ets.insert(ets_tab, {:state, :ok})
-      _ -> :ets.insert(ets_tab, {:state, :error})
-    end
+  defp set_state(%{ets_tab: ets_tab, on_state_change: {m, f, a}}, state) do
+    state = parse_state(state)
+    :ets.insert(ets_tab, {:state, state})
+    apply(m, f, [state, a])
+  end
+
+  defp set_state(%{ets_tab: ets_tab, on_state_change: nil}, state) do
+    state = parse_state(state)
+    :ets.insert(ets_tab, {:state, state})
   end
 
   defp set_check_state(%{ets_tab: ets_tab}, check_id, result),
@@ -457,4 +470,7 @@ defmodule Existence do
       _ -> false
     end
   end
+
+  defp parse_state(:healthy), do: :ok
+  defp parse_state(_), do: :error
 end

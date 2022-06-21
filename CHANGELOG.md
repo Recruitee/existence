@@ -1,3 +1,8 @@
+## v0.3.0 unreleased
+
+### Enhancements
+* [Existence] Added `:on_state_change` option.
+
 ## v0.2.0 [2022-06-13]
 
 ### Enhancements
