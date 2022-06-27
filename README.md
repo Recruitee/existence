@@ -19,7 +19,7 @@ Add `Existence` library to your application dependencies:
 ```elixir
 def deps do
   [
-    {:existence, "~> 0.1.1"}
+    {:existence, "~> 0.3.0"}
   ]
 end
 ```
@@ -53,8 +53,8 @@ defmodule MyApp.Checks do
 end
 ```
 
-Check functions above are for illustrative purposes only, please refer to the `Existence` module
-documentation for more realistic dependencies checks examples.
+Dependencies checks functions above are for illustrative purposes only, please refer to the
+`Existence` module documentation for more realistic dependencies checks examples.
 
 Configure your Phoenix router to respond to the `/healthcheck` endpoint requests using for example
 `Plug.Router.forward/2`:
@@ -77,7 +77,3 @@ List individual dependencies checks current states:
 iex> Existence.get_checks()
 [check_1: :ok, check_2: :ok]
 ```
-
-## TODO
-- [ ] add `telemetry` event emitted on an overall health-check state change.
-

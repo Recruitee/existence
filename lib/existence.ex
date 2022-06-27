@@ -91,8 +91,8 @@ defmodule Existence do
   * `:checks` - keyword list with user defined dependencies checks parameters, see description
   below for details. Default: `[]`.
   * `:state` - initial overall `Existence` instance health-check state. Default: `:error`.
-  * `:on_state_change` - MFA tuple pointing at user function which will be executed on the overall
-    state change.
+  * `:on_state_change` - MFA tuple pointing at user function which will be synchronously applied
+    on the overall health-check state change.
     User function should be of two arity. As a first argument it will receive current state as
     `:ok | :error` atom. As a second argument function will receive static arg given in the MFA tuple.
     Default: `nil`.

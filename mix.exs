@@ -2,7 +2,7 @@ defmodule Existence.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/Recruitee/existence"
-  @version "0.2.0"
+  @version "0.3.0"
 
   def project do
     [
