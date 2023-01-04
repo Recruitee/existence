@@ -2,7 +2,7 @@
 
 [![Hex Version](https://img.shields.io/hexpm/v/existence)](https://hex.pm/packages/existence)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen)](https://hexdocs.pm/existence)
-![CI](https://github.com/Recruitee/existence/workflows/CI/badge.svg)
+[![CI](https://github.com/Recruitee/existence/workflows/CI/badge.svg)](https://github.com/Recruitee/existence/actions/workflows/ci.yml)
 
 Asynchronous dependency health checks library.
 
