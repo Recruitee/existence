@@ -1,3 +1,9 @@
+## v0.3.1 [2023-01-05]
+
+* Improved documentation.
+* Minor code cleanup.
+* Added CI workflow.
+
 ## v0.3.0 [2022-06-27]
 
 ### Enhancements
