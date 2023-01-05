@@ -3,7 +3,7 @@ defmodule Existence.Plug do
   Plug responding with a health-check state.
 
   Plug sends a `text/plain` response depending on the `Existence` overall health-check state
-  returned by an `Existence.get_state/1` function.
+  returned by an `Existence.get_state/1` or `Existence.get_state!/1` function.
 
   ## Configuration
   Plug is configured with a keyword list.
@@ -19,7 +19,7 @@ defmodule Existence.Plug do
     get an overall health-check state.
     If set to false, not raising `Existence.get_state/1` function will be used.
     Default: `false`.
-  * `:name` - `Existence` name same as a name used when starting instance with supervision tree.
+  * `:name` - instance name defined when starting `Existence` child with supervision tree.
     Default: `Existence`.
 
   ## Usage

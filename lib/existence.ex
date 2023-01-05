@@ -1,6 +1,6 @@
 defmodule Existence do
   @moduledoc """
-  Health-checks start and state access module.
+  Health-checks management and access module.
 
   Module provides functions for accessing an overall health-check state and individual dependencies
   checks results.
@@ -16,28 +16,29 @@ defmodule Existence do
   Overall health-check unhealthy state is represented by an `:error` atom.
 
   User defined dependencies checks functions are spawned as monitored isolated processes.
-  If user dependency check function raises, throws an error, timeouts or fails in any way it
-  doesn't have a negative impact on other processes, including user application.
+  If user dependency check function raises, throws an error, timeouts or fails in any other way it
+  doesn't have a negative impact on other processes and it is gracefully handled by the library.
 
   Current dependencies checks functions results and current overall health-check state are stored
   in an ETS table.
   Whenever user executes any of available state getters, request is made against ETS table which
   has `:read_concurrency` set to `true`.
-  In practice it means that library can handle huge numbers of requests per second
-  without blocking any other processes.
+  In practice it means that library can handle unlimited numbers of requests per second
+  without blocking any other processes, adding latency to the response or overloading dependency
+  with synchronous  requests.
 
-  Module provides few functions to access checks states:
+  Module provides following functions to access checks states:
   * `get_state/1` and `get_state!/1` to get overall health-check state,
   * `get_checks/1` and `get_checks!/1` to get dependencies checks states.
 
   Functions with bangs are negligibly cheaper computationally because they don't check if ETS table
-  storing Existence state exists and they will raise if such table doesn't exist.
+  storing given Existence instance state exists and they will raise if such table doesn't exist.
 
   ## Usage
-  After defining dependencies checks parameters, `Existence` can be started using
+  After defining dependencies checks options, `Existence` can be started using
   your application supervisor:
   ```elixir
-  #lib/my_app/application.ex
+  # lib/my_app/application.ex
   def start(_type, _args) do
     health_checks = [
       # minimal dependency check configuration:
@@ -67,7 +68,7 @@ defmodule Existence do
   Initial overall health-check state can be changed with a `:state` key. In a code example above
   initial overall health-check state is set to a healthy state with: `state: :ok`.
 
-  `Existence` supports starting multiple instances by using common Elixir child identifiers:
+   Multiple `Existence` instances can be started by using common Elixir child identifiers
   `:id` and `:name`, for example:
   ```elixir
   children = [
@@ -77,19 +78,18 @@ defmodule Existence do
   ```
 
   ## Configuration
-  `Existence` startup options:
-  * `:id` - any term used to identify the child specification internally. Please refer to the
-  `Supervisor` "Child specification" documentation section for details on child `:id` key.
-  Default: `Existence`.
-  * `:name` - name used to start `Existence` `:gen_statem` process locally. If defined
-  as an `atom()` `:gen_statem.start_link/3` is used to start `Existence` process
-  without registration.
-  If defined as a `{:local, atom()}` tuple, `:gen_statem.start_link/4` is invoked and process is
-  registered locally with a given name.
-  Key value is used to select `Existence` instance when running any of the state getters,
-  for example: `get_state(CustomName)`. Default: `Existence`.
+  `Existence` options:
+  * `:id` - term used to identify the child specification internally. Please refer to the
+    `Supervisor` "Child specification" documentation section for details on child `:id` key.
+    Default: `Existence`.
+  * `:name` - name used to start `Existence` process locally. If defined as an `atom()`
+    `:gen_statem.start_link/3` is used to start `Existence` process without registration.
+    If defined as a `{:local, atom()}` tuple, `:gen_statem.start_link/4` is invoked and process is
+    registered locally with a given name.
+    Key value is used to select `Existence` instance when running any of the state getters,
+    for example: `get_state(CustomName)`. Default: `Existence`.
   * `:checks` - keyword list with user defined dependencies checks parameters, see description
-  below for details. Default: `[]`.
+    below for details. Default: `[]`.
   * `:state` - initial overall `Existence` instance health-check state. Default: `:error`.
   * `:on_state_change` - MFA tuple pointing at user function which will be synchronously applied
     on the overall health-check state change.
@@ -98,29 +98,31 @@ defmodule Existence do
     Default: `nil`.
 
   Dependencies checks are defined using a keyword list with configuration parameters defined
-  as a maps.
+  as a maps, see code example above.
 
   Dependencies checks configuration options:
   * `:mfa` - `{module, function, arguments}` tuple specifying user defined function to spawn when
-  executing given dependency check. Please refer to `Kernel.apply/3` documentation for
-  the MFA pattern explanation. Required.
+    executing given dependency check. Please refer to `Kernel.spawn_monitor/3` documentation for
+    the MFA pattern explanation. Function will be spawned with arguments given in the `:mfa` key.
+    Required.
   * `:initial_delay` - amount of time in milliseconds to wait before spawning a dependency check
-  for the first time. Can be used to wait for a dependency process to properly initialize before
-  executing dependency check function first time when application is started. Default: `100`.
+    for the first time. Can be used to wait for a dependency process to properly initialize before
+    executing dependency check function first time when application is started. Default: `100`.
   * `:interval` - time interval in milliseconds specifying how frequently given check should be
-  executed. Default: `30_000`.
+    executed and dependency checked. Default: `30_000`.
   * `:state` - initial dependency check state when starting `Existence`. Default: `:error`.
-  * `:timeout` - after spawning dependency check function library will wait `:timeout` amount of
-  milliseconds for the dependency check function to complete.
-  If dependency check function will do not complete within a given timeout, dependency check
-  function process will be killed, and dependency check state will assume a `:killed` atom value.
-  Default: `5_000`.
+  * `:timeout` - after spawning dependency check function we will wait `:timeout` amount of
+    milliseconds for the dependency check function to complete.
+    If dependency check function will do not complete within a given timeout, dependency check
+    function process will be killed, and dependency check state will assume a `:killed` value.
+    Default: `5_000`.
 
   ## Dependencies checks
-  User defined dependencies checks functions must return an `:ok` atom for the healthy state.
+  User defined dependencies checks functions must return an `:ok` atom within given `:timeout`
+  interval to acquire a healthy state.
   Any other values returned by dependencies checks functions are considered as an unhealthy state.
 
-  Example checks for two popular dependencies, PostgreSQL and Redis:
+  Example health-checks callback functions for two popular dependencies, PostgreSQL and Redis:
   ```elixir
   #lib/checks.ex
   def check_postgres() do
@@ -169,20 +171,17 @@ defmodule Existence do
   ]
 
   @doc """
-  Get dependencies checks states.
+  Get dependencies checks states for `name` instance.
 
-  Function gets current dependencies checks states for an `Existence` instance started with
-  a given `name`.
-  If `name` is not provided, checks states for instance with default `:name` (`Existence`)
-  are returned.
+  Function gets current dependencies checks states for an instance started with a given `name`,
+  by default `Existence`.
 
   Dependencies checks functions results are returned as a keyword list.
   If no checks were defined function will return an empty list.
+  Function returns `:undefined` if `name` instance doesn't exist.
 
   Dependency check function result equal to an `:ok` atom means healthy state, any other term is
   associated with an unhealthy state.
-
-  Function returns `:undefined` if `name` instance doesn't exist.
 
   ##### Example:
   ```elixir
@@ -207,10 +206,9 @@ defmodule Existence do
   end
 
   @doc """
-  Same as `get_checks/1` but raises on error.
+  Same as `get_checks/1` but raises if `name` instance doesn't exist.
 
-  Function will raise with an `ArgumentError` exception if `Existence` instance `name`
-  doesn't exist.
+  Function will raise with an `ArgumentError` exception if instance `name` doesn't exist.
 
   ##### Example:
   ```elixir
@@ -231,19 +229,16 @@ defmodule Existence do
   end
 
   @doc """
-  Get an overall health-check state.
+  Get an overall health-check state for `name` instance.
 
-  Function gets current overall health-check state for an `Existence` instance started with
-  a given `name`.
-  If `name` is not provided, overall health-check state for an instance with default `:name`
-  (`Existence`) is returned.
+  Function gets current overall health-check state for an instance started with a given `name`,
+  by default `Existence`.
 
-  Function returns an `:ok` atom when overall health-check state is healthy and an `:error` atom
-  when state is unhealthy.
-  Overall health-check state is healthy only when all dependencies health checks are healthy.
-
+  Function returns an `:ok` when overall health-check state is healthy and an `:error` when state
+  is unhealthy.
   Function returns `:undefined` if `name` instance doesn't exist.
 
+  Overall health-check state is healthy only when all dependencies health checks are healthy.
 
   ##### Example:
   ```elixir
@@ -268,10 +263,9 @@ defmodule Existence do
   end
 
   @doc """
-  Same as `get_state/1` but raises on error.
+  Same as `get_state/1` but raises if `name` instance doesn't exist.
 
-  Function will raise with an `ArgumentError` exception if `Existence` instance `name`
-  doesn't exist.
+  Function will raise with an `ArgumentError` exception if instance `name` doesn't exist.
 
   ##### Example:
   ```elixir
@@ -315,7 +309,6 @@ defmodule Existence do
 
   @impl true
   def init(args) do
-    Process.flag(:trap_exit, true)
     ets_tab = Keyword.fetch!(args, :ets_name)
 
     :ets.new(ets_tab, [
@@ -370,7 +363,8 @@ defmodule Existence do
   end
 
   def unhealthy(:info, {:DOWN, ref, :process, pid, :normal}, data) do
-    find_check(pid, ref, data)
+    pid
+    |> find_check(ref, data)
     |> maybe_respawn_check()
 
     :keep_state_and_data
@@ -404,7 +398,8 @@ defmodule Existence do
   end
 
   def healthy(:info, {:DOWN, ref, :process, pid, :normal}, data) do
-    find_check(pid, ref, data)
+    pid
+    |> find_check(ref, data)
     |> maybe_respawn_check()
 
     :keep_state_and_data

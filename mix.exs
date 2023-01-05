@@ -2,7 +2,7 @@ defmodule Existence.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/Recruitee/existence"
-  @version "0.3.0"
+  @version "0.3.1"
 
   def project do
     [
@@ -25,7 +25,7 @@ defmodule Existence.MixProject do
   defp deps do
     [
       {:plug, "~> 1.10"},
-      {:ex_doc, "~> 0.28.0", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.29.0", only: :dev, runtime: false}
     ]
   end
 
